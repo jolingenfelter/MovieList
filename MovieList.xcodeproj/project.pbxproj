@@ -22,6 +22,7 @@
 		170460902A897C0E002742BA /* MovieListResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1704608F2A897C0E002742BA /* MovieListResultType.swift */; };
 		170460922A899F71002742BA /* MovieListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170460912A899F71002742BA /* MovieListError.swift */; };
 		170460952A89A9B9002742BA /* MovieListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170460942A89A9B9002742BA /* MovieListRow.swift */; };
+		170460972A8A6891002742BA /* MoviesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170460962A8A6891002742BA /* MoviesListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		1704608F2A897C0E002742BA /* MovieListResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListResultType.swift; sourceTree = "<group>"; };
 		170460912A899F71002742BA /* MovieListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListError.swift; sourceTree = "<group>"; };
 		170460942A89A9B9002742BA /* MovieListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListRow.swift; sourceTree = "<group>"; };
+		170460962A8A6891002742BA /* MoviesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			children = (
 				1704606F2A892F84002742BA /* MovieListApp.swift */,
 				170460712A892F84002742BA /* MoviesListView.swift */,
+				170460962A8A6891002742BA /* MoviesListController.swift */,
 				170460942A89A9B9002742BA /* MovieListRow.swift */,
 				1704607F2A895218002742BA /* MovieListEndpoint.swift */,
 				170460892A89676D002742BA /* MovieListClient.swift */,
@@ -190,6 +193,7 @@
 				170460922A899F71002742BA /* MovieListError.swift in Sources */,
 				170460952A89A9B9002742BA /* MovieListRow.swift in Sources */,
 				170460802A895218002742BA /* MovieListEndpoint.swift in Sources */,
+				170460972A8A6891002742BA /* MoviesListController.swift in Sources */,
 				170460822A89651C002742BA /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
