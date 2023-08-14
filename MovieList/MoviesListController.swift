@@ -23,13 +23,15 @@ final class MoviesListController {
         _state = state
     }
 
-    func fetchMoviesIfNeeded(after movie: Movie) async throws {
+    func fetchMoviesIfNeeded(after movie: Movie? = nil) async throws {
         if movie == state.movies.last {
+            try await fetchMovies()
+        } else if state.movies.isEmpty {
             try await fetchMovies()
         }
     }
 
-    func fetchMovies() async throws {
+    private func fetchMovies() async throws {
         guard !state.isLoading  else {
             return
         }

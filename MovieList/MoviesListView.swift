@@ -15,24 +15,28 @@ struct MoviesListView: View {
     }
 
     var body: some View {
-        List {
-            ForEach(state.movies) { movie in
-                MovieListRow(movie: movie)
-                    .onAppear {
-                        Task {
-                            do {
-                                try await controller.fetchMoviesIfNeeded(after: movie)
-                            } catch {
-                                print(error)
+        NavigationStack {
+            List {
+                ForEach(state.movies) { movie in
+                    MovieListRow(movie: movie)
+                        .onAppear {
+                            Task {
+                                do {
+                                    try await controller.fetchMoviesIfNeeded(after: movie)
+                                } catch {
+                                    print(error)
+                                }
                             }
                         }
-                    }
+                }
             }
+            .navigationTitle("Movies List")
+            .navigationBarTitleDisplayMode(.large)
         }
         .onAppear {
             Task {
                 do {
-                    try await controller.fetchMovies()
+                    try await controller.fetchMoviesIfNeeded()
                 } catch {
                     print(error)
                 }
