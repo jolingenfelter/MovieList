@@ -21,11 +21,7 @@ struct MoviesListView: View {
                     MovieListRow(movie: movie)
                         .onAppear {
                             Task {
-                                do {
-                                    try await controller.fetchMoviesIfNeeded(after: movie)
-                                } catch {
-                                    print(error)
-                                }
+                                await controller.fetchMoviesIfNeeded(after: movie)
                             }
                         }
                 }
@@ -35,13 +31,10 @@ struct MoviesListView: View {
         }
         .onAppear {
             Task {
-                do {
-                    try await controller.fetchMoviesIfNeeded()
-                } catch {
-                    print(error)
-                }
+                await controller.fetchMoviesIfNeeded()
             }
         }
+        .alert($state.error)
     }
 }
 
