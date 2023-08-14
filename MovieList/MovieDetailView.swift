@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct MovieDetailView: View {
+    let movie: Movie
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            Color.red
+        }
     }
 }
 
-struct MovieDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieDetailView()
-    }
-}
+//struct MovieDetailView_Previews: PreviewProvider {
+//    let movie = Movie(from: <#T##Decoder#>)
+//    static var previews: some View {
+//        MovieDetailView(movie: <#Movie#>)
+//    }
+//}
