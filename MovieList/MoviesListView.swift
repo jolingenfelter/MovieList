@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct MoviesListView: View {
-    @State private var state = MoviesListState()
-
-    private var controller: MoviesListController {
-        MoviesListController(state: $state)
-    }
+    @State private var controller = MoviesListController()
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(state.movies) { movie in
+                ForEach(controller.movies) { movie in
                     MovieListRow(movie: movie)
                         .onAppear {
                             Task {
@@ -34,7 +30,7 @@ struct MoviesListView: View {
                 await controller.fetchMoviesIfNeeded()
             }
         }
-        .alert($state.error)
+        .alert($controller.error)
     }
 }
 

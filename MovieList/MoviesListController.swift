@@ -7,48 +7,41 @@
 
 import SwiftUI
 
-struct MoviesListState {
-    var movies: [Movie] = []
-    var pageIndex: Int = 1
-    var isLoading: Bool = false
-    var filters: [Filter] = []
-    var error: AlertModel? = nil
-}
-
-final class MoviesListController {
+struct MoviesListController {
     private let apiClient = MovieListClient()
 
-    @Binding var state: MoviesListState
+    private(set) var movies: [Movie] = []
+    private(set) var pageIndex: Int = 1
+    private(set) var isLoading: Bool = false
+    private(set) var filters: [Filter] = []
 
-    init(state: Binding<MoviesListState>) {
-        _state = state
-    }
+    var error: AlertModel? = nil
 
+    mutating
     func fetchMoviesIfNeeded(after movie: Movie? = nil) async {
-        if movie == state.movies.last {
-            await fetchMovies()
-        } else if state.movies.isEmpty {
+        if movie == movies.last || movies.isEmpty  {
             await fetchMovies()
         }
     }
 
+    mutating
     private func fetchMovies() async {
-        guard !state.isLoading  else {
+        guard !isLoading  else {
             return
         }
 
-        state.isLoading = true
+        isLoading = true
 
         defer {
-            state.isLoading = false
+            isLoading = false
         }
 
         do {
-            let paginatedResult = try await apiClient.fetchMovies(filters: state.filters, page: state.pageIndex)
-            state.movies.append(contentsOf: paginatedResult.results)
-            state.pageIndex += 1
+            let paginatedResult = try await apiClient.fetchMovies(filters: filters, page: pageIndex)
+            movies.append(contentsOf: paginatedResult.results)
+            pageIndex += 1
         } catch {
-            state.error = AlertModel(
+            self.error = AlertModel(
                 title: "Error",
                 message: error.localizedDescription,
                 actions: [.ok]
