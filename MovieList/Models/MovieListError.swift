@@ -19,11 +19,6 @@ struct MovieListError: Codable, Error {
         case success, errors
     }
 
-    static let decodingError = MovieListError(
-        statusMessage: "Unable to decode data",
-        success: false
-    )
-
     init(
         statusCode: Int? = nil,
         statusMessage: String? = nil,
@@ -43,4 +38,11 @@ struct MovieListError: Codable, Error {
         success = try container.decode(Bool.self, forKey: .success)
         errors = try container.decodeIfPresent([String].self, forKey: .errors)
     }
+}
+
+extension MovieListError {
+    static let decodingError = MovieListError(
+        statusMessage: "Unable to decode data",
+        success: false
+    )
 }
