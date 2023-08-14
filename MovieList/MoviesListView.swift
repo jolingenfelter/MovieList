@@ -21,7 +21,7 @@ struct MoviesListView: View {
                     .onAppear {
                         Task {
                             do {
-                                try await controller.fetchMovies()
+                                try await controller.fetchMoviesIfNeeded(after: movie)
                             } catch {
                                 print(error)
                             }
