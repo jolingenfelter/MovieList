@@ -16,7 +16,11 @@ import SwiftUI
  */
 
 struct MoviesListView: View {
-    @State private var controller = MoviesListController()
+    @State
+    private var controller = MoviesListController()
+
+    @State
+    private var isShowingFilterSheet: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -36,13 +40,28 @@ struct MoviesListView: View {
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
             }
-        }
-        .onAppear {
-            Task {
-                await controller.fetchMoviesIfNeeded()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isShowingFilterSheet = true
+                    } label: {
+                        Image(systemName: "list.bullet")
+                    }
+                }
+            }
+            .onChange(of: controller.filters) { newValue in
+
+            }
+            .alert($controller.error)
+            .sheet(isPresented: $isShowingFilterSheet) {
+                FilterListView(appliedFilters: $controller.filters)
+            }
+            .onAppear {
+                Task {
+                    await controller.fetchMoviesIfNeeded()
+                }
             }
         }
-        .alert($controller.error)
     }
 }
 

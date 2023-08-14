@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Language: Codable, Identifiable {
+struct Language: Codable, Identifiable, Equatable {
     let englishName: String
     let iso_639_1: String
     let name: String

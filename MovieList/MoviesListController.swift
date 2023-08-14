@@ -13,8 +13,8 @@ struct MoviesListController {
     private(set) var movies: [Movie] = []
     private(set) var pageIndex: Int = 1
     private(set) var isLoading: Bool = false
-    private(set) var filters: [Filter] = []
 
+    var filters: [Filter] = []
     var error: AlertModel? = nil
 
     mutating

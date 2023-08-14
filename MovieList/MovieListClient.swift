@@ -22,7 +22,8 @@ final class MovieListClient {
     }
 
     func fetchGenres() async throws -> [Genre] {
-        try await fetchData(from: MovieListEndpoint.genres.url)
+        let container: GenresContainer = try await fetchData(from: MovieListEndpoint.genres.url)
+        return container.genres
     }
 
     func fetchLanguages() async throws -> [Language] {
@@ -73,12 +74,18 @@ final class MovieListClient {
         )
 
         let (data, _) = try await URLSession.shared.data(from: url)
+
+        let json = try JSONSerialization.jsonObject(with: data)
+        print("*** json: \(json)")
+
         let result: MovieListResultType<T> = try MovieListResultType(data: data)
 
         switch result {
         case .success(let result):
+            print("*** result: \(result)")
             return result
         case .error(let error):
+            print("*** error: \(error)")
             throw error
         }
     }
