@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+// Filters
+/*
+ - Sheet
+ - Picker
+ - Struct with available filters and selected filters
+
+ */
+
 struct MoviesListView: View {
     @State private var controller = MoviesListController()
 
@@ -14,16 +22,20 @@ struct MoviesListView: View {
         NavigationStack {
             List {
                 ForEach(controller.movies) { movie in
-                    MovieListRow(movie: movie)
-                        .onAppear {
-                            Task {
-                                await controller.fetchMoviesIfNeeded(after: movie)
-                            }
+                    NavigationLink(value: movie) {
+                        MovieListRow(movie: movie)
+                    }.onAppear {
+                        Task {
+                            await controller.fetchMoviesIfNeeded(after: movie)
                         }
+                    }
                 }
             }
             .navigationTitle("Movies List")
             .navigationBarTitleDisplayMode(.large)
+            .navigationDestination(for: Movie.self) { movie in
+                MovieDetailView(movie: movie)
+            }
         }
         .onAppear {
             Task {

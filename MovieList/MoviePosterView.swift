@@ -22,6 +22,7 @@ struct MoviePosterView: View {
                 ProgressView()
             }
         }
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
     @ViewBuilder

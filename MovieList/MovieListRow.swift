@@ -10,14 +10,11 @@ import SwiftUI
 struct MovieListRow: View {
     let movie: Movie
 
-    @ScaledMetric(relativeTo: .headline)
-    private var height: CGFloat = 160
-
     @ScaledMetric(relativeTo: .caption)
-    private var captionHeight: CGFloat = 60
+    private var captionHeight: CGFloat = 100
 
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             MoviePosterView(url: movie.posterURL)
                 .frame(maxWidth: 80)
 
@@ -31,8 +28,8 @@ struct MovieListRow: View {
                     .multilineTextAlignment(.leading)
                     .frame(maxHeight: captionHeight)
             }
-            .padding()
+            .padding(.horizontal)
         }
-        .frame(height: height)
+        .padding(.vertical)
     }
 }
